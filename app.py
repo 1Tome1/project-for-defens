@@ -1,18 +1,55 @@
 from tkinter import *
 from tkinter import ttk
 
-from logic import *
+import logicapp
+import pickle
+
 
 
 app = Tk()
 
 app.title("neural network")
-app.geometry("300x400")
+app.geometry("350x400")
 app.resizable(False, False)
 
 
 icon = PhotoImage( file = "images.png")
 app.iconphoto(True, icon)
+
+
+
+
+pkl_filename = "pickle_model.pkl"
+
+with open(pkl_filename, 'rb') as file:
+    pickle_model = pickle.load(file)
+
+
+
+def Start():
+    x = label1.get()
+    y = label2.get()
+
+    test = ([[int(x), int(y)]])
+    a = pickle_model.predict(test)
+
+    if a == 1:
+        textbox3["text"] = "Женщина"
+    else:
+        textbox3["text"] = "Мужчина"
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 for i in range(3): app.columnconfigure(index=i,weight=1)
@@ -35,7 +72,9 @@ textbox3.grid(row=1, column=1, padx=1, pady=1)
 
 
 
-button = ttk.Button(text="Определить")
+button = ttk.Button(text="Определить", command=Start)
 button.grid(row=2, column=1)
+
+
 
 app.mainloop()
