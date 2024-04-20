@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 
-import logicapp
 import pickle
 
 
@@ -19,21 +18,21 @@ app.iconphoto(True, icon)
 
 
 
-pkl_filename = "pickle_model.pkl"
+pkl_filename = "pickle_model.pkl"    #Загрузка обученной модели нейросети
 
 with open(pkl_filename, 'rb') as file:
     pickle_model = pickle.load(file)
 
 
 
-def Start():
+def Start():        # Обраотка нажатия на кнопку
     x = label1.get()
     y = label2.get()
 
     test = ([[int(x), int(y)]])
-    a = pickle_model.predict(test)
+    a = pickle_model.predict(test)      #Обращение у нейросети с запросом
 
-    if a == 1:
+    if a == 1:      #Расшифровка ответа нейросети
         textbox3["text"] = "Женщина"
     else:
         textbox3["text"] = "Мужчина"
@@ -50,7 +49,7 @@ def Start():
 
 
 
-
+#Разработка интерфейса приложения
 
 for i in range(3): app.columnconfigure(index=i,weight=1)
 for j in range(3): app.rowconfigure(index=j,weight=1)
