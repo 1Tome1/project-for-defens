@@ -1,6 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 
+from logic import *
+
 
 app = Tk()
 
